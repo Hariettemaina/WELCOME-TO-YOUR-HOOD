@@ -10,6 +10,7 @@ django-tinymce = "*"
 django-countries = "*"
 django-crispy-forms = "*"
 django-registration = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
