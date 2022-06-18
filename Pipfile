@@ -8,6 +8,8 @@ django = "*"
 pillow = "*"
 django-tinymce = "*"
 django-countries = "*"
+django-crispy-forms = "*"
+django-registration = "*"
 
 [dev-packages]
 
