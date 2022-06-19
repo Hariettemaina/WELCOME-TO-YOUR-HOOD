@@ -9,7 +9,7 @@ pillow = "*"
 django-tinymce = "*"
 django-countries = "*"
 django-crispy-forms = "*"
-django-registration = "*"
+django-registration = "==2.4.1"
 psycopg2 = "*"
 
 [dev-packages]
