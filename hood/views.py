@@ -93,6 +93,7 @@ def new_business(request):
 
 @login_required(login_url='/accounts/login/')
 def user_profiles(request):
+    Profile.objects.get_or_create(user=request.user)
     current_user = request.user
     profile = request.user.profile
     

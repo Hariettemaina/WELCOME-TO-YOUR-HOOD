@@ -15,8 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.auth import views 
+from registration.backends.simple.views import RegistrationView
+from hood.forms import RegisterForm
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('hood.urls'))
+    path('',include('hood.urls')),
+    path('accounts/register',RegistrationView.as_view(form_class=RegisterForm),name='registration_register',),
+    path('accounts/',include('registration.backends.simple.urls')),
+    #path('logout/',auth_views.logout, {"next_page": '/'}),
+    path('tinymce/', include('tinymce.urls')),
 ]
