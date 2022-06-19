@@ -9,6 +9,18 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+# cloudinary
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+cloudinary.config(
+    cloud_name='moringajolly',
+    api_key='765663241794342',
+    api_secret='J2pxypWEaqiK3uEDTOlL1Ywm5UM',
+    secure=True
+)
+
 
 from pathlib import Path
 
@@ -38,8 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hood',
-    'crispy_forms',
-    'tinymce',
+    'django_registration',
+    'bootstrap5',
+    'cloudinary',
+    
     
 ]
 
@@ -80,7 +94,7 @@ WSGI_APPLICATION = 'neighborhood.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hoods',
+        'NAME': 'neighborhood',
         'USER': 'carolmaina',
     'PASSWORD':'ethan2017',
     }
