@@ -5,6 +5,8 @@ from .models import *
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+from django.contrib.auth import  logout
+from django.contrib import messages
 
 
 # index view
@@ -118,6 +120,11 @@ def update_profile(request):
         return render(request, "profile.html", {"danger": "Profile Update Failed"})
 
 
+#logout function
+def logout_request(request):
+	logout(request)
+	messages.info(request, "You have successfully logged out.") 
+	return redirect("/")
 # create post
 @login_required(login_url="/accounts/login/")
 def create_post(request):
@@ -204,17 +211,7 @@ def create_business(request):
         current_user = request.user
         name = request.POST["name"]
         email = request.POST["email"]
-        # phone = request.POST["phone"]
-        # address = request.POST["address"]
-        # location = request.POST["location"]
-        # neighbourhood = request.POST["neighbourhood"]
-
-        # check if its an instance of location
-        # if location == "":
-        #     location = None
-        # else:
-        #     location = Location.objects.get(name=location)
-
+     
         # get current user neighbourhood
         profile = Profile.objects.filter(user_id=current_user.id).first()
         # check if user has neighbourhood
@@ -229,7 +226,7 @@ def create_business(request):
             businesses = Business.objects.filter(user_id=current_user.id)
             contacts = Contact.objects.filter(user_id=current_user.id)
             # redirect to profile with error message
-            return render(request, "profile.html", {"danger": "Update Profile by selecting Your Neighbourhood name to continue 😥!!", "locations": locations, "neighbourhood": neighbourhood, "categories": category, "businesses": businesses, "contacts": contacts, "posts": posts})
+            return render(request, "profile.html", {"danger": "Update Profile by selecting Your Neighbourhood name to continue", "locations": locations, "neighbourhood": neighbourhood, "categories": category, "businesses": businesses, "contacts": contacts, "posts": posts})
         else:
             neighbourhood = profile.neighbourhood
 
@@ -243,9 +240,6 @@ def create_business(request):
             user_id=current_user.id,
             name=name,
             email=email,
-            # phone=phone,
-            # address=address,
-            # location=location,
             neighbourhood=neighbourhood,
         )
         business.create_business()
@@ -263,13 +257,6 @@ def create_contact(request):
         name = request.POST["name"]
         email = request.POST["email"]
         phone = request.POST["phone"]
-        # neighbourhood = request.POST["neighbourhood"]
-
-        # # check if its an instance of location
-        # if location == "":
-        #     location = None
-        # else:
-        #     location = Location.objects.get(name=location)
 
         # get current user neighbourhood
         profile = Profile.objects.filter(user_id=current_user.id).first()
